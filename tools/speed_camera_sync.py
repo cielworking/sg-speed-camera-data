@@ -9,7 +9,13 @@ import requests
 from bs4 import BeautifulSoup
 
 SOURCE = "https://www.police.gov.sg/Knowledge-Hub/Traffic/Traffic-Matters/Speed-Enforcement-Camera-Locations"
-OUTPUT = Path(__file__).resolve().parents[1] / "assets" / "data" / "speed_cameras.json"
+REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
+DATA_DIRECTORY = (
+    REPOSITORY_ROOT / "data"
+    if (REPOSITORY_ROOT / "data").exists()
+    else REPOSITORY_ROOT / "assets" / "data"
+)
+OUTPUT = DATA_DIRECTORY / "speed_cameras.json"
 COORDINATE = re.compile(r"(-?\d{1,3}\.\d+)\s*,\s*(-?\d{1,3}\.\d+)")
 
 
